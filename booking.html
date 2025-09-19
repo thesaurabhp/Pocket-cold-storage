@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pocket Cold Storage - Booking</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    nav h2 {
+      font-size: 1.5rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #fff;
+      margin-left: 20px;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+    }
+
+    .profile img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+    }
+
+    .profile h3 {
+      margin: 0;
+      font-size: 1.3rem;
+    }
+
+    .form-section {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      margin-bottom: 30px;
+    }
+
+    .form-section h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #fff;
+      color: #0072ff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      display: block;
+      margin: 20px auto 0;
+    }
+
+    button:hover {
+      background: #0072ff;
+      color: #fff;
+    }
+
+    .availability {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 15px;
+      margin-top: 20px;
+      display: none;
+    }
+
+    .confirmation {
+      display: none;
+      background: rgba(0, 255, 100, 0.15);
+      border: 2px solid #0f0;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <h2>Pocket Cold Storage</h2>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="#">Logout</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Profile -->
+    <div class="profile">
+      <img src="chhotu_ji.jpg" alt="User">
+      <div>
+        <h3>Saurabh Pandey</h3>
+        <p>Registered Farmer | Member since 2023</p>
+      </div>
+    </div>
+
+    <!-- Booking Form -->
+    <div class="form-section">
+      <h2>📅 Book Cold Storage</h2>
+      <div class="form-group">
+        <label for="storage">Select Cold Storage</label>
+        <select id="storage">
+          <option>Golden Cold Storage</option>
+          <option>Mittal Cold Storage</option>
+          <option>Adarsh Cold Storage</option>
+          <option>Maa Cold Storage</option>
+          <option>AgroFresh Cold Storage</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="goods">Select Goods</label>
+        <select id="goods">
+          <option>Potatoes</option>
+          <option>Tomatoes</option>
+          <option>Wheat</option>
+          <option>Onions</option>
+          <option>Rice</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="quantity">Quantity (in kg)</label>
+        <input type="number" id="quantity" placeholder="Enter quantity">
+      </div>
+      <div class="form-group">
+        <label for="days">Storage Duration (in days)</label>
+        <input type="number" id="days" placeholder="Enter days">
+      </div>
+      <button onclick="checkAvailability()">Check Availability</button>
+
+      <div class="availability" id="availabilityBox">
+        ✅ Slot Available! 20 tons space free. <br>
+        <button onclick="confirmBooking()">Confirm Booking</button>
+      </div>
+
+      <div class="confirmation" id="confirmationBox">
+        🎉 Booking Confirmed! Your goods have been scheduled for storage.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function checkAvailability() {
+      document.getElementById('availabilityBox').style.display = 'block';
+    }
+
+    function confirmBooking() {
+      document.getElementById('confirmationBox').style.display = 'block';
+      document.getElementById('availabilityBox').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

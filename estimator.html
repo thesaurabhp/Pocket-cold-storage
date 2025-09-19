@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pocket Cold Storage - Storage Fees Estimator</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #fff;
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      animation: fadeIn 1s ease;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 15px;
+      margin-top: 10px;
+      background: #fff;
+      color: #2a5298;
+      font-weight: 700;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1.1rem;
+    }
+
+    .btn:hover {
+      background: #2a5298;
+      color: #fff;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .result {
+      margin-top: 25px;
+      text-align: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>💰 Storage Fees Estimator</h1>
+    
+    <div class="form-group">
+      <label for="storage">Select Cold Storage:</label>
+      <select id="storage">
+        <option value="Golden">Golden Cold Storage</option>
+        <option value="Mittal">Mittal Cold Storage</option>
+        <option value="Adarsh">Adarsh Cold Storage</option>
+        <option value="Maa">Maa Cold Storage</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="goods">Goods Type:</label>
+      <input type="text" id="goods" placeholder="e.g., Potatoes, Apples, Medicines" />
+    </div>
+
+    <div class="form-group">
+      <label for="weight">Weight / Volume (in kg):</label>
+      <input type="number" id="weight" placeholder="Enter total weight" />
+    </div>
+
+    <div class="form-group">
+      <label for="duration">Duration (in days):</label>
+      <input type="number" id="duration" placeholder="Enter storage duration" />
+    </div>
+
+    <button class="btn" onclick="calculateFees()">Estimate Fees</button>
+
+    <div class="result" id="result">Estimated Fees will appear here 💡</div>
+  </div>
+
+  <script>
+    function calculateFees() {
+      const weight = parseFloat(document.getElementById("weight").value);
+      const duration = parseFloat(document.getElementById("duration").value);
+      const goods = document.getElementById("goods").value;
+
+      if(isNaN(weight) || isNaN(duration) || goods.trim() === "") {
+        document.getElementById("result").innerText = "⚠️ Please fill all fields correctly!";
+        return;
+      }
+
+      // Simple pricing model: ₹2 per kg per day
+      const ratePerKgPerDay = 2;
+      const total = weight * duration * ratePerKgPerDay;
+
+      document.getElementById("result").innerText = 
+        `✅ Estimated Fees: ₹${total.toLocaleString()} for storing ${weight}kg of ${goods} for ${duration} days.`;
+    }
+  </script>
+</body>
+</html>

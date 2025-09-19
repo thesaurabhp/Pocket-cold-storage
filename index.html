@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pocket Cold Storage - Home</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 30px;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      background: #fff;
+      color: #0072ff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Hero Section */
+    header {
+      text-align: center;
+      padding: 60px 20px 30px;
+      animation: fadeDown 1.2s ease;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    /* Features Grid */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 40px;
+      padding: 50px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 25px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transform: translateY(50px);
+      opacity: 0;
+      transition: all 0.6s ease;
+    }
+
+    .card.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .card p {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      opacity: 0.85;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background: #fff;
+      color: #0072ff;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #0072ff;
+      color: #fff;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    /* Animations */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <h2>Pocket Cold Storage</h2>
+    <div class="nav-links">
+      <a href="login.html">Login</a>
+      <a href="signup.html">Sign Up</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header>
+    <h1>Welcome to Pocket Cold Storage</h1>
+    <p>Bringing Offline Cold Storages Online – Easy, Smart & Digital</p>
+  </header>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="card">
+        <h2>📋 Lists of Cold Storage</h2>
+        <p>Find nearby cold storages with full details and availability.</p>
+        <a href="list.html" class="btn">Explore</a>
+      </div>
+      
+      <div class="card">
+        <h2>🌡️ Goods Condition Monitoring</h2>
+        <p>Track temperature, humidity, and safety of your stored goods.</p>
+        <a href="condition.html" class="btn">Monitor</a>
+      </div>
+      
+      <div class="card">
+        <h2>📅 Online Booking & Availability</h2>
+        <p>Book your storage space instantly and check real-time slots.</p>
+        <a href="booking.html" class="btn">Book Now</a>
+      </div>
+      
+      <div class="card">
+        <h2>💰 Storage Fees Estimator</h2>
+        <p>Quickly calculate estimated storage costs before booking.</p>
+        <a href="estimator.html" class="btn">Estimate</a>
+      </div>
+      
+  </section>
+
+  <script>
+    // Scroll Animation for Cards
+    const cards = document.querySelectorAll('.card');
+    const revealOnScroll = () => {
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        if(rect.top < window.innerHeight - 50) {
+          card.classList.add('show');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+  </script>
+</body>
+</html>

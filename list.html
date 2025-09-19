@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cold Storages List</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: #fff;
+      min-height: 100vh;
+      padding-bottom: 50px;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      margin-left: 20px;
+      padding: 8px 16px;
+      border-radius: 30px;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      background: #fff;
+      color: #0072ff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Page Header */
+    header {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Storage List */
+    .storage-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .card-content h2 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .rating {
+      color: gold;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .contact {
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      opacity: 0.9;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .btn {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn.call {
+      background: #28a745;
+      color: #fff;
+    }
+
+    .btn.call:hover {
+      background: #1e7e34;
+    }
+
+    .btn.msg {
+      background: #ffc107;
+      color: #333;
+    }
+
+    .btn.msg:hover {
+      background: #e0a800;
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <h2>Pocket Cold Storage</h2>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="#">Login</a>
+      <a href="#">Sign Up</a>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header>
+    <h1>Available Cold Storages</h1>
+    <p>Find trusted cold storages with contact options & ratings</p>
+  </header>
+
+  <!-- Storage List -->
+  <section class="storage-list">
+    <div class="card">
+      <img src="Golden.jpeg" alt="Golden Cold Storage">
+      <div class="card-content">
+        <h2>Golden Cold Storage</h2>
+        <div class="rating">⭐⭐⭐⭐☆ (4.0)</div>
+        <div class="contact">📍 Delhi | 📞 +91 8839028099</div>
+        <div class="actions">
+          <button class="btn call" onclick="startVideoCall('+918839028099')">📹 Video Call</button>
+          <button class="btn msg">💬 Message</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="agri.jpeg" alt="Mittal Cold Storage">
+      <div class="card-content">
+        <h2>Agriculture Cold Storage</h2>
+        <div class="rating">⭐⭐⭐⭐⭐ (4.5)</div>
+        <div class="contact">📍 Mumbai | 📞 +91 9876501234</div>
+        <div class="actions">
+          <button class="btn call" onclick="startVideoCall('+919876501234')">📹 Video Call</button>
+          <button class="btn msg">💬 Message</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="for.jpeg" alt="Adarsh Cold Storage">
+      <div class="card-content">
+        <h2>Adarsh Cold Storage</h2>
+        <div class="rating">⭐⭐⭐☆☆ (3.5)</div>
+        <div class="contact">📍 Lucknow | 📞 +91 9685918849</div>
+        <div class="actions">
+          <button class="btn call" onclick="startVideoCall('+919685918849')">📹 Video Call</button>
+          <button class="btn msg">💬 Message</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="images.jpeg" alt="Maa Cold Storage">
+      <div class="card-content">
+        <h2>Maa Cold Storage</h2>
+        <div class="rating">⭐⭐⭐⭐ (4.2)</div>
+        <div class="contact">📍 Jaipur | 📞 +91 9765432109</div>
+        <div class="actions">
+          <button class="btn call" onclick="startVideoCall('+919765432109')">📹 Video Call</button>
+          <button class="btn msg">💬 Message</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="dhamki.jpeg" alt="Fresh Cold Store">
+      <div class="card-content">
+        <h2>Fresh Cold Store</h2>
+        <div class="rating">⭐⭐⭐⭐⭐ (4.8)</div>
+        <div class="contact">📍 Pune | 📞 +91 9123456780</div>
+        <div class="actions">
+          <button class="btn call" onclick="startVideoCall('+919123456780')">📹 Video Call</button>
+          <button class="btn msg">💬 Message</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="hello.jpeg" alt="Agro Cold Hub">
+      <div class="card-content">
+        <h2>Agro Cold Hub</h2>
+        <div class="rating">⭐⭐⭐⭐ (4.1)</div>
+        <div class="contact">📍 Bhopal | 📞 +91 9001234567</div>
+        <div class="actions">
+          <button class="btn call" onclick="startVideoCall('+919001234567')">📹 Video Call</button>
+          <button class="btn msg">💬 Message</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/400x180?text=Farm+Fresh+Storage" alt="Farm Fresh Storage">
+      <div class="card-content">
+        <h2>Farm Fresh Storage</h2>
+        <div class="rating">⭐⭐⭐⭐⭐ (4.7)</div>
+        <div class="contact">📍 Hyderabad | 📞 +91 9911223344</div>
+        <div class="actions">
+          <button class="btn call" onclick="startVideoCall('+919911223344')">📹 Video Call</button>
+          <button class="btn msg">💬 Message</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/400x180?text=Safe+Storage+Pvt+Ltd" alt="Safe Storage Pvt Ltd">
+      <div class="card-content">
+        <h2>Safe Storage Pvt Ltd</h2>
+        <div class="rating">⭐⭐⭐☆☆ (3.9)</div>
+        <div class="contact">📍 Kolkata | 📞 +91 9876549999</div>
+        <div class="actions">
+          <button class="btn call" onclick="startVideoCall('+919876549999')">📹 Video Call</button>
+          <button class="btn msg">💬 Message</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/400x180?text=Chill+Zone+Cold+Store" alt="Chill Zone Cold Store">
+      <div class="card-content">
+        <h2>Chill Zone Cold Store</h2>
+        <div class="rating">⭐⭐⭐⭐ (4.3)</div>
+        <div class="contact">📍 Chandigarh | 📞 +91 9876543211</div>
+        <div class="actions">
+          <button class="btn call" onclick="startVideoCall('+919876543211')">📹 Video Call</button>
+          <button class="btn msg">💬 Message</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/400x180?text=National+Cold+Storage" alt="National Cold Storage">
+      <div class="card-content">
+        <h2>National Cold Storage</h2>
+        <div class="rating">⭐⭐⭐⭐⭐ (4.6)</div>
+        <div class="contact">📍 Ahmedabad | 📞 +91 9811223344</div>
+        <div class="actions">
+          <button class="btn call" onclick="startVideoCall('+919811223344')">📹 Video Call</button>
+          <button class="btn msg">💬 Message</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Scroll reveal animation
+    const cards = document.querySelectorAll('.card');
+    const revealOnScroll = () => {
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 50) {
+          card.classList.add('show');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+
+    // Video Call function
+    function startVideoCall(number) {
+      const facetimeLink = `facetime://${number}`;
+      const fallbackLink = `https://meet.jit.si/${number}-coldstorage`;
+
+      window.location.href = facetimeLink;
+
+      setTimeout(() => {
+        if (!document.hidden) {
+          window.open(fallbackLink, "_blank");
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

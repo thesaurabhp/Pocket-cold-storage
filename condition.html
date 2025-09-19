@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goods Condition Monitoring - Pocket Cold Storage</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #fff;
+      min-height: 100vh;
+      padding: 30px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 15px;
+      font-size: 2.5rem;
+    }
+
+    p {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Profile Card */
+    .profile {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      background: rgba(255,255,255,0.1);
+      padding: 20px 30px;
+      border-radius: 20px;
+      max-width: 600px;
+      margin: 20px auto;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .profile img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      object-fit: cover;
+    }
+
+    .profile-info h2 {
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+
+    .profile-info p {
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+
+    /* Dropdown Section */
+    .selectors {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    select {
+      padding: 10px 15px;
+      border-radius: 10px;
+      border: none;
+      margin: 10px;
+      font-size: 1rem;
+      font-weight: 500;
+      outline: none;
+      background: #fff;
+      color: #2a5298;
+      cursor: pointer;
+    }
+
+    /* Monitoring Grid */
+    .grid {
+      display: none;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 25px;
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    .gauge {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      margin: 15px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.3rem;
+      font-weight: bold;
+      background: conic-gradient(#00ff88 var(--percent, 0%), #333 var(--percent, 0%));
+      color: #fff;
+    }
+
+    .card h2 {
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    .status {
+      margin-top: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin: 30px auto 0;
+      padding: 12px 25px;
+      background: #fff;
+      color: #2a5298;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .back-btn:hover {
+      background: #2a5298;
+      color: #fff;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <h1>🌡️ Goods Condition Monitoring</h1>
+  <p>View real-time condition of your stored goods</p>
+
+  <!-- Profile Section -->
+  <div class="profile">
+    <img src="chhotu_ji.jpg" alt="Profile">
+    <div class="profile-info">
+      <h2>Saurabh Pandey</h2>
+      <p>Customer ID: PCS1023</p>
+      <p>Stored Goods: 5 Items</p>
+    </div>
+  </div>
+
+  <!-- Cold Storage & Goods Selection -->
+  <div class="selectors">
+    <select id="storageSelect">
+      <option value="">-- Select Cold Storage --</option>
+      <option value="Golden">Golden Cold Storage</option>
+      <option value="Mittal">Mittal Cold Storage</option>
+      <option value="Adarsh">Adarsh Cold Storage</option>
+    </select>
+
+    <select id="goodsSelect">
+      <option value="">-- Select Goods --</option>
+      <option value="Apples">Apples</option>
+      <option value="Tomatoes">Tomatoes</option>
+      <option value="Potatoes">Potatoes</option>
+    </select>
+  </div>
+
+  <!-- Monitoring Section -->
+  <div class="grid" id="monitorGrid">
+    <div class="card">
+      <h2>Temperature</h2>
+      <div class="gauge" id="tempGauge">0°C</div>
+      <div class="status" id="tempStatus">Loading...</div>
+    </div>
+    <div class="card">
+      <h2>Humidity</h2>
+      <div class="gauge" id="humidityGauge">0%</div>
+      <div class="status" id="humidityStatus">Loading...</div>
+    </div>
+    <div class="card">
+      <h2>Air Quality</h2>
+      <div class="gauge" id="airGauge">0%</div>
+      <div class="status" id="airStatus">Loading...</div>
+    </div>
+    <div class="card">
+      <h2>Freshness Index</h2>
+      <div class="gauge" id="freshnessGauge">0%</div>
+      <div class="status" id="freshnessStatus">Loading...</div>
+    </div>
+  </div>
+
+  <div style="text-align:center;">
+    <a href="index.html" class="back-btn">⬅ Back to Home</a>
+  </div>
+
+  <script>
+    // Function to update gauges
+    function updateGauge(id, min, max, unit, statusId) {
+      const gauge = document.getElementById(id);
+      const status = document.getElementById(statusId);
+
+      setInterval(() => {
+        let value = Math.floor(Math.random() * (max - min + 1)) + min;
+        gauge.style.setProperty("--percent", value + "%");
+        gauge.textContent = value + unit;
+
+        if (id === "tempGauge") {
+          status.textContent = value < 2 ? "Too Cold ❄️" : value > 8 ? "Too Hot 🔥" : "Optimal ✅";
+        } else if (id === "humidityGauge") {
+          status.textContent = value < 40 ? "Too Dry 🌵" : value > 70 ? "Too Humid 💧" : "Optimal ✅";
+        } else if (id === "airGauge") {
+          status.textContent = value > 70 ? "Clean Air 🌿" : "Poor Air ⚠️";
+        } else if (id === "freshnessGauge") {
+          status.textContent = value > 75 ? "Fresh 🥬" : value > 40 ? "Average 🍏" : "Spoiling ⚠️";
+        }
+      }, 2000);
+    }
+
+    // Show monitoring only after selection
+    document.getElementById("goodsSelect").addEventListener("change", () => {
+      const storage = document.getElementById("storageSelect").value;
+      const goods = document.getElementById("goodsSelect").value;
+      const grid = document.getElementById("monitorGrid");
+
+      if (storage && goods) {
+        grid.style.display = "grid";
+
+        // Start gauges
+        updateGauge("tempGauge", 0, 15, "°C", "tempStatus");
+        updateGauge("humidityGauge", 20, 90, "%", "humidityStatus");
+        updateGauge("airGauge", 30, 100, "%", "airStatus");
+        updateGauge("freshnessGauge", 10, 100, "%", "freshnessStatus");
+      }
+    });
+  </script>
+</body>
+</html>
