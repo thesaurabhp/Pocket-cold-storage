@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pocket Cold Storage - Login</title>
+  <title>Pocket Cold Storage - Admin Login</title>
   <style>
-    /* Reset */
     * {
       margin: 0;
       padding: 0;
@@ -14,7 +13,7 @@
     }
 
     body {
-      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      background: linear-gradient(135deg, #0072ff, #00c6ff);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -22,16 +21,16 @@
     }
 
     .login-container {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
       padding: 40px;
       border-radius: 20px;
       width: 100%;
-      max-width: 400px;
+      max-width: 420px;
       text-align: center;
       box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-      animation: fadeIn 1s ease;
       color: #fff;
+      animation: fadeIn 1s ease;
     }
 
     h1 {
@@ -102,31 +101,32 @@
 </head>
 <body>
   <div class="login-container">
-    <h1>Login</h1>
-    <form id="loginForm">
+    <h1>Admin Login</h1>
+    <form id="adminLoginForm">
       <div class="form-group">
-        <label for="email">Email Address:</label>
-        <input type="email" id="email" placeholder="Enter your email" required />
+        <label for="adminName">Cold Storage Name:</label>
+        <input type="text" id="adminName" placeholder="Enter storage name" required />
       </div>
       <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" placeholder="Enter your password" required />
+        <label for="adminEmail">Email Address:</label>
+        <input type="email" id="adminEmail" placeholder="Enter your email" required />
       </div>
-      <button type="submit" class="btn">Login</button>
+      <div class="form-group">
+        <label for="adminPassword">Password:</label>
+        <input type="password" id="adminPassword" placeholder="Enter your password" required />
+      </div>
+      <button type="submit" class="btn">Login as Admin</button>
     </form>
     <div class="links">
-      <p><a href="forgot.html">Forgot Password?</a></p>
-      <p>Don’t have an account? <a href="signup.html">Sign Up</a></p>
-      <p>Are you an Admin? <a href="admin-login.html">Login as Admin</a></p>
+      <p><a href="login.html">Back to User Login</a></p>
     </div>
-    
   </div>
 
   <script>
-    // Redirect to index.html after login
-    document.getElementById("loginForm").addEventListener("submit", function(e) {
-      e.preventDefault(); // prevent real form submit
-      window.location.href = "index.html"; // redirect
+    document.getElementById("adminLoginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      // You can later add real validation here
+      window.location.href = "admin.html"; // redirect to admin dashboard
     });
   </script>
 </body>

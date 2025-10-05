@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pocket Cold Storage - Admin Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      min-height: 100vh;
+      display: flex;
+      color: #fff;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 25%;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      border-right: 2px solid rgba(255,255,255,0.2);
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .client-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .client-list li {
+      background: rgba(255,255,255,0.1);
+      margin-bottom: 10px;
+      padding: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .client-list li:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 1.8rem;
+    }
+
+    .logout-btn {
+      background: #fff;
+      color: #0072ff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .logout-btn:hover {
+      background: #0072ff;
+      color: #fff;
+    }
+
+    .client-info {
+      background: rgba(255,255,255,0.15);
+      border-radius: 15px;
+      padding: 25px;
+      min-height: 250px;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .client-info h2 {
+      margin-bottom: 10px;
+    }
+
+    .client-info p {
+      font-size: 1rem;
+      margin: 6px 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Requests Section */
+    .requests-section {
+      margin-top: 30px;
+    }
+
+    .request-item {
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .request-item button {
+      margin-top: 10px;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .approve {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .deny {
+      background: #E53935;
+      color: white;
+    }
+
+    .approve:hover { opacity: 0.8; }
+    .deny:hover { opacity: 0.8; }
+
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>Clients</h2>
+    <ul class="client-list" id="clientList"></ul>
+  </div>
+
+  <div class="main-content">
+    <div class="header">
+      <h1>Cold Storage Dashboard</h1>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <div class="client-info" id="clientInfo">
+      <h2>Select a client to view details</h2>
+      <p>The details of each client will appear here.</p>
+    </div>
+
+    <div class="requests-section" id="requestsSection">
+      <h2>Booking Requests</h2>
+    </div>
+  </div>
+
+  <script>
+    // --- Load Data ---
+    const defaultClients = [
+      {
+        id: 1,
+        name: "Ramesh Kumar",
+        goods: "Potatoes",
+        quantity: "500 kg",
+        chamber: "Chamber A",
+        temperature: "4°C",
+        humidity: "60%"
+      },
+      {
+        id: 2,
+        name: "Sita Devi",
+        goods: "Tomatoes",
+        quantity: "300 kg",
+        chamber: "Chamber B",
+        temperature: "6°C",
+        humidity: "65%"
+      }
+    ];
+
+    const bookingRequests = [
+      { id: 1, name: "Ravi Singh", goods: "Mangoes", quantity: "250 kg" },
+      { id: 2, name: "Anita Sharma", goods: "Apples", quantity: "150 kg" }
+    ];
+
+    // Load existing or default clients from localStorage
+    let clients = JSON.parse(localStorage.getItem("clients")) || defaultClients;
+
+    // --- Load Clients in Sidebar ---
+    function loadClients() {
+      const list = document.getElementById("clientList");
+      list.innerHTML = "";
+      clients.forEach(c => {
+        const li = document.createElement("li");
+        li.textContent = c.name;
+        li.onclick = () => showClientInfo(c);
+        list.appendChild(li);
+      });
+    }
+
+    // --- Show Client Info ---
+    function showClientInfo(client) {
+      const infoBox = document.getElementById("clientInfo");
+      infoBox.innerHTML = `
+        <h2>${client.name}</h2>
+        <p><strong>Goods:</strong> ${client.goods}</p>
+        <p><strong>Quantity:</strong> ${client.quantity}</p>
+        <p><strong>Chamber:</strong> ${client.chamber}</p>
+        <p><strong>Temperature:</strong> ${client.temperature}</p>
+        <p><strong>Humidity:</strong> ${client.humidity}</p>
+      `;
+    }
+
+    // --- Load Requests ---
+    function loadRequests() {
+      const requestSection = document.getElementById("requestsSection");
+      requestSection.innerHTML = "<h2>Booking Requests</h2>";
+      bookingRequests.forEach(r => {
+        const div = document.createElement("div");
+        div.classList.add("request-item");
+        div.innerHTML = `
+          <p><strong>${r.name}</strong> requests storage for ${r.goods} (${r.quantity})</p>
+          <button class="approve" onclick="approveRequest(${r.id})">Approve</button>
+          <button class="deny" onclick="denyRequest(${r.id})">Deny</button>
+        `;
+        requestSection.appendChild(div);
+      });
+    }
+
+    // --- Approve Request ---
+    function approveRequest(id) {
+      const request = bookingRequests.find(r => r.id === id);
+      if (request) {
+        // Convert request into a client record
+        const newClient = {
+          id: Date.now(),
+          name: request.name,
+          goods: request.goods,
+          quantity: request.quantity,
+          chamber: "Pending Allocation",
+          temperature: "5°C",
+          humidity: "60%"
+        };
+
+        clients.push(newClient);
+        localStorage.setItem("clients", JSON.stringify(clients));
+
+        // Remove request from list
+        const index = bookingRequests.indexOf(request);
+        bookingRequests.splice(index, 1);
+
+        loadClients();
+        loadRequests();
+        alert(`${request.name}'s request approved ✅`);
+      }
+    }
+
+    // --- Deny Request ---
+    function denyRequest(id) {
+      const request = bookingRequests.find(r => r.id === id);
+      if (request) {
+        const index = bookingRequests.indexOf(request);
+        bookingRequests.splice(index, 1);
+        loadRequests();
+        alert(`${request.name}'s request denied ❌`);
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem("clients");
+      window.location.href = "admin-login.html";
+    }
+
+    // --- Initialize Page ---
+    loadClients();
+    loadRequests();
+  </script>
+</body>
+</html>
